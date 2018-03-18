@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('first_name', models.CharField(max_length=64)),
                 ('second_name', models.CharField(max_length=64, null=True)),
                 ('last_name', models.CharField(max_length=64)),
-                ('carers', models.ManyToManyField(to='Kindergarten_app.Carer')),
+                ('carers', models.ManyToManyField(to='kindergarten_app.Carer')),
             ],
         ),
         migrations.CreateModel(
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=64)),
-                ('member', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='Kindergarten_app.Child')),
+                ('member', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='kindergarten_app.Child')),
             ],
         ),
         migrations.CreateModel(
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=64, unique=True)),
                 ('phone_number', models.CharField(max_length=10)),
                 ('type_of_teacher', models.IntegerField(choices=[(-1, 'dundefined'), (1, 'pre-school educator'), (2, 'pedagogue'), (3, 'psychologist'), (4, 'pre-school help'), (5, 'pre-school teacher')])),
-                ('groups', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='Kindergarten_app.Groups')),
+                ('groups', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='kindergarten_app.Groups')),
             ],
         ),
         migrations.CreateModel(

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Kindergarten_app',
+    'kindergarten_app',
 ]
 
 MIDDLEWARE = [
