@@ -32,7 +32,7 @@ class Groups(models.Model):
 
 class Teacher(models.Model):
     TYPES = (
-        (-1, "dundefined"),
+        (-1, "undefined"),
         (1, "pre-school educator"),
         (2, "pedagogue"),
         (3, "psychologist"),
