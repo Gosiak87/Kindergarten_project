@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> Dodawanie dziecka </h1>
+
+<form action="{% url 'add-child' %}" method="POST">
+   {% csrf_token %}
+   {{ form.as_p }}
+
+
+
+   <input type="submit" value="Dodaj dziecko">
+
+</form>
+
+{% endblock %}

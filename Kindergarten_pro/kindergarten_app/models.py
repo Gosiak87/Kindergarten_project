@@ -19,10 +19,25 @@ class Carer(models.Model):
 
 
 class Child(models.Model):
+    KINDERGARTEN_GROUPS = {
+        (0, "Nieokreślona"),
+        (1, "Grupa Zielona"),
+        (2, "Grupa Niebieska"),
+    }
+
     first_name = models.CharField(max_length=64)
     second_name = models.CharField(max_length=64, null=True)
     last_name = models.CharField(max_length=64)
+    year_of_birth = models.IntegerField(null=True)
+    group = models.IntegerField(choices=KINDERGARTEN_GROUPS, default=0)
     carers = models.ManyToManyField(Carer)
+
+    @property
+    def name(self):
+        return "{} {} {}".format(self.first_name, self.second_name, self.last_name)
+
+    def __str__(self):
+        return self.name
 
 
 class Groups(models.Model):

@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from kindergarten_app.views import MainView
+from kindergarten_app.views import MainView, AllChildrenView, AddChildView
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     url('^main', MainView.as_view()),
+    url('^all_children', AllChildrenView.as_view()),
+    url('^add_child', AddChildView.as_view(), name="add-child"),
+    #url(r'^child/(?P<child_id>(\d)+)', ChildView.as_view(),
+       # name="student-group"),
 
 ]
