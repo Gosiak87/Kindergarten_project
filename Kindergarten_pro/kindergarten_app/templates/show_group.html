@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> {{ group.name }} </h1>
+
+<form action="{% url 'show-group' group.id %}" method="POST">
+
+    <label>
+        Name: {{ group.name }}
+    </label>
+    <br>
+
+
+<hr>
+<a href="/modify_group/{{ group.id }}/"> Edytuj grupe </a>
+
+<br>
+<a href="/all_groups/"> Pokaż wszystkie grupy </a>
+<br>
+<a href="/main/">Wróć do strony głównej</a>
+</br>
+
+
+
+
+</form>
+
+{% endblock %}

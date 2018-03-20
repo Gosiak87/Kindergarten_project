@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .validators import check_number
 
 # Create your models here.
 
@@ -13,17 +12,25 @@ class Carer(models.Model):
         (3, "foster_parent")
     )
     first_name = models.CharField(max_length=64)
-    second_name = models.CharField(max_length=64, null=True)
+    second_name = models.CharField(max_length=64, null=True, blank=True)
     last_name = models.CharField(max_length=64)
     email = models.EmailField(max_length=64, unique=True)
     phone_number = models.CharField(max_length=10)
     family_connection = models.IntegerField(choices=CONNECTION, default=-1)
 
+    @property
+    def name(self):
+        second_name = self.second_name or ""
+        return "{} {} {}".format(self.first_name, second_name, self.last_name)
+
+    def __str__(self):
+        return self.name
+
 
 class Child(models.Model):
 
     first_name = models.CharField(max_length=64)
-    second_name = models.CharField(max_length=64, null=True)
+    second_name = models.CharField(max_length=64, null=True, blank=True)
     last_name = models.CharField(max_length=64)
     date_of_birth = models.DateField(null=True)
     group = models.ForeignKey("Group", on_delete=models.SET_NULL, null=True)
@@ -31,7 +38,8 @@ class Child(models.Model):
 
     @property
     def name(self):
-        return "{} {} {}".format(self.first_name, self.second_name, self.last_name)
+        second_name = self.second_name or ""
+        return "{} {} {}".format(self.first_name, second_name, self.last_name)
 
     def __str__(self):
         return self.name
@@ -39,6 +47,9 @@ class Child(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.name
 
 
 class Teacher(models.Model):
@@ -52,12 +63,20 @@ class Teacher(models.Model):
     )
 
     first_name = models.CharField(max_length=64)
-    second_name = models.CharField(max_length=64, null=True)
+    second_name = models.CharField(max_length=64, null=True, blank=True)
     last_name = models.CharField(max_length=64)
     email = models.EmailField(max_length=64, unique=True)
     phone_number = models.CharField(max_length=10)
     type_of_teacher = models.IntegerField(choices=TYPES)
     group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
+
+    @property
+    def name(self):
+        second_name = self.second_name or ""
+        return "{} {} {}".format(self.first_name, second_name, self.last_name)
+
+    def __str__(self):
+        return self.name
 
 
 class Trip(models.Model):
@@ -65,6 +84,8 @@ class Trip(models.Model):
     description = models.TextField()
     date = models.DateField()
     trip_guardian = models.ManyToManyField(Teacher)
+
+
 
 #
 # class InformationCard(models.Model):

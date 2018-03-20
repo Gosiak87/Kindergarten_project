@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> Dodawanie wycieczki </h1>
+
+<form action="{% url 'add-trip' %}" method="POST">
+   {% csrf_token %}
+   {{ form.as_p }}
+
+
+
+   <input type="submit" value="Dodaj wycieczkę ">
+
+<hr>
+ <br>
+
+                    <a href="/main/">Wróć do strony głównej </a>
+    <br>
+
+
+</form>
+
+{% endblock %}

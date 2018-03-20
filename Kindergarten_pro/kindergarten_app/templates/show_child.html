@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> {{ child.name }} </h1>
+
+<form action="{% url 'show-child' child.id %}" method="POST">
+
+    <label>
+        Name: {{ child.name }}
+    </label>
+    <br>
+    <label>
+        Date of birth : {{ child.date_of_birth }}
+    </label>
+    <br>
+    <label>
+       Group : {{ child.group}}
+    </label>
+
+<h2>{{ carer_.name }}</h2>
+
+
+
+<hr>
+<a href="/modify_child/{{ child.id }}/"> Edytuj przedszkolaka </a>
+<br>
+<a href="/all_children/"> Pokaż wszystkich przedszkolaków </a>
+<br>
+<hr>
+<br>
+<a href="/main/">Wróć do strony głównej</a>
+</br>
+
+
+
+
+
+</form>
+
+{% endblock %}

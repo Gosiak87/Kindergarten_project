@@ -16,13 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from kindergarten_app.views import MainView, AllChildrenView, AddChildView
+from kindergarten_app.views import (
+    MainView,
+    AllChildrenView, AddChildView, AllTeacherView, AllGroupsView, AddTeacherView, AddGroupView, ShowChildView, ShowTeacherView, ShowGroupView, AllTripsView, ShowTripView, AddTripView)
+
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     url('^main', MainView.as_view()),
     url('^all_children', AllChildrenView.as_view()),
     url('^add_child', AddChildView.as_view(), name="add-child"),
+    url('^all_teacher', AllTeacherView.as_view()),
+    url('^add_teacher', AddTeacherView.as_view(), name="add-teacher"),
+    url('^all_group', AllGroupsView.as_view()),
+    url('^add_group', AddGroupView.as_view(), name="add-group"),
+    url('^show_child/(?P<id>(\d)+)', ShowChildView.as_view(), name="show-child"),
+    url('^show_teacher/(?P<id>(\d)+)', ShowTeacherView.as_view(), name="show-teacher"),
+    url('^show_group/(?P<id>(\d)+)', ShowGroupView.as_view(), name="show-group"),
+    url('^all_trips', AllTripsView.as_view()),
+    url('^show_trip/(?P<id>(\d)+)', ShowTripView.as_view(), name="show-trip"),
+    url('^add_trip', AddTripView.as_view(), name="add-trip"),
+
     #url(r'^child/(?P<child_id>(\d)+)', ChildView.as_view(),
        # name="student-group"),
 

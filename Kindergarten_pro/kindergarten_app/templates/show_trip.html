@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> {{ trip.name }} </h1>
+
+<form action="{% url 'show-trip' trip.id %}" method="POST">
+
+    <label>
+        Name : {{ trip.name }}
+    </label>
+    <br>
+    <label>
+       Date : {{ trip.date }}
+    </label>
+    <br>
+    <label>
+        Description : {{ trip.description }}
+    </label>
+    <br>
+
+    <label>
+       Trip guardian : {{ trip.trip_guardian_get_teacher_display }}
+    </label>
+    <br>
+
+
+<hr>
+<a href="/modify_trip/{{ trip.id }}/"> Edytuj wycieczka </a>
+<br>
+<a href="/all_trips"> Pokaż wszystkie wycieczki </a>
+<br>
+
+<br>
+<a href="/main/">Wróć do strony głównej</a>
+</br>
+
+
+
+
+
+</form>
+
+{% endblock %}

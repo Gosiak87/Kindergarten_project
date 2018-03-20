@@ -7,10 +7,19 @@
    {% csrf_token %}
    {{ form.as_p }}
 
+   <h5>Carer 1:</h5>
+   {{ carer_1_form.as_p }}
+
+   <h5>Carer 2:</h5>
+   {{ carer_2_form.as_p }}
 
 
-   <input type="submit" value="Dodaj dziecko">
 
-</form>
+   <input type="submit" value="Dodaj wszystko">
+<hr>
+ <br>
+
+                    <a href="/main/">Wróć do strony głównej </a>
+    <br>
 
 {% endblock %}

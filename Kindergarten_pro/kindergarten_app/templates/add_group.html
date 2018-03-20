@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> Dodawanie grupy </h1>
+
+<form action="{% url 'add-group' %}" method="POST">
+   {% csrf_token %}
+   {{ form.as_p }}
+
+
+
+   <input type="submit" value="Dodaj grupe">
+<hr>
+ <br>
+
+                    <a href="/main/">Wróć do strony głównej </a>
+    <br>
+
+
+</form>
+
+{% endblock %}

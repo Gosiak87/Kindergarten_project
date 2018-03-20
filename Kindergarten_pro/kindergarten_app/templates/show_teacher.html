@@ -1,0 +1,44 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> {{ teacher.name }} </h1>
+
+<form action="{% url 'show-teacher' teacher.id %}" method="POST">
+
+    <label>
+        Name: {{ teacher.name }}
+    </label>
+    <br>
+    <label>
+        Group : {{ teacher.group }}
+    </label>
+    <br>
+    <label>
+       Type of Teacher : {{ teacher.get_type_of_teacher_display }}
+    </label>
+    <br>
+
+    <label>
+       Email : {{ teacher.email }}
+    </label>
+    <br>
+    <label>
+       Number of phone : {{ teacher.phone_number }}
+    </label>
+    <br>
+
+<hr>
+<a href="/modify_teacher/{{ teacher.id }}/"> Edytuj nauczyciela </a>
+
+<br>
+<a href="/all_teachers/"> Pokaż wszystkich nauczycieli </a>
+<br>
+<a href="/main/">Wróć do strony głównej</a>
+</br>
+
+
+
+
+</form>
+
+{% endblock %}

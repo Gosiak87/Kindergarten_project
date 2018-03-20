@@ -1,21 +1,23 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h1> Wszystkie dzieci w przedszkolu </h1>
+<h1> Wszystkie grupy w przedszkolu </h1>
 
 
 <h2></h2>
 <ul>
-    {% for child in children %}
+    {% for group in groups %}
 
-    <li><a href="child">{{ child.name }} </a> </li>
+    <li><a href="group">{{ group.name }} </a> </li>
 
     {% endfor %}
+
 <hr>
-    <br>
+     <br>
 
                     <a href="/main/">Wróć do strony głównej </a>
     <br>
+
 
 </ul>
 
