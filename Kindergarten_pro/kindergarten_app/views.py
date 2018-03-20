@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import Child
-from .forms import ChildAddForm
+from .forms import ChildAddForm, CarerAddForm
 from django.urls import reverse
 
 
@@ -64,4 +64,12 @@ class AddChildView(View):
                       context=ctx)
 
 
-
+class AddTeacherView(View):
+    def get(self, request):
+        form = ChildAddForm()
+        ctx = {
+            "form": form,
+        }
+        return render(request,
+                      template_name="add_child.html",
+                      context=ctx)

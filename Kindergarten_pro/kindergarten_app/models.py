@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .validators import check_number
 
 # Create your models here.
+
 
 class Carer(models.Model):
     CONNECTION = (
@@ -19,17 +21,12 @@ class Carer(models.Model):
 
 
 class Child(models.Model):
-    KINDERGARTEN_GROUPS = {
-        (0, "Nieokreślona"),
-        (1, "Grupa Zielona"),
-        (2, "Grupa Niebieska"),
-    }
 
     first_name = models.CharField(max_length=64)
     second_name = models.CharField(max_length=64, null=True)
     last_name = models.CharField(max_length=64)
-    year_of_birth = models.IntegerField(null=True)
-    group = models.IntegerField(choices=KINDERGARTEN_GROUPS, default=0)
+    date_of_birth = models.DateField(null=True)
+    group = models.ForeignKey("Group", on_delete=models.SET_NULL, null=True)
     carers = models.ManyToManyField(Carer)
 
     @property
@@ -40,19 +37,18 @@ class Child(models.Model):
         return self.name
 
 
-class Groups(models.Model):
+class Group(models.Model):
     name = models.CharField(max_length=64)
-    member = models.ForeignKey(Child, on_delete=models.SET_NULL, null=True)
 
 
 class Teacher(models.Model):
     TYPES = (
-        (-1, "undefined"),
-        (1, "pre-school educator"),
-        (2, "pedagogue"),
-        (3, "psychologist"),
-        (4, "pre-school help"),
-        (5, "pre-school teacher"),
+        (-1, "nieokreślony"),
+        (1, "wychowawca przedszkolny"),
+        (2, "pedagog"),
+        (3, "psycholog"),
+        (4, "pomoc wychowawcy"),
+        (5, "nauczyciel przedszkolny"),
     )
 
     first_name = models.CharField(max_length=64)
@@ -61,7 +57,7 @@ class Teacher(models.Model):
     email = models.EmailField(max_length=64, unique=True)
     phone_number = models.CharField(max_length=10)
     type_of_teacher = models.IntegerField(choices=TYPES)
-    groups = models.ForeignKey(Groups, on_delete=models.SET_NULL, null=True)
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
 
 
 class Trip(models.Model):
