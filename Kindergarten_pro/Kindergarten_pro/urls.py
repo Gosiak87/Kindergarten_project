@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import url
 from kindergarten_app.views import (
     MainView,
-    AllChildrenView, AddChildView, AllTeacherView, AllGroupsView, AddTeacherView, AddGroupView, ShowChildView, ShowTeacherView, ShowGroupView, AllTripsView, ShowTripView, AddTripView)
+    AllChildrenView, AddChildView, AllTeacherView, AllGroupsView, AddTeacherView, AddGroupView, ShowChildView, ShowTeacherView, ShowGroupView, AllTripsView, ShowTripView, AddTripView, PresenceChildView, UserLoginView, UserLogoutView)
 
 
 urlpatterns = [
@@ -36,6 +36,10 @@ urlpatterns = [
     url('^all_trips', AllTripsView.as_view()),
     url('^show_trip/(?P<id>(\d)+)', ShowTripView.as_view(), name="show-trip"),
     url('^add_trip', AddTripView.as_view(), name="add-trip"),
+    url(r'^child_presence/(?P<child_id>(\d)+)/(?P<date>([\d-])+)$',
+        PresenceChildView.as_view(), name="present-child"),
+    url(r'^login$', UserLoginView.as_view(), name="login"),
+    url(r'^logout$', UserLogoutView.as_view(), name="logout"),
 
     #url(r'^child/(?P<child_id>(\d)+)', ChildView.as_view(),
        # name="student-group"),

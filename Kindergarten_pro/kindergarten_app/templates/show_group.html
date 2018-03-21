@@ -5,11 +5,20 @@
 
 <form action="{% url 'show-group' group.id %}" method="POST">
 
-    <label>
-        Name: {{ group.name }}
-    </label>
+
+<h3>        Nauczyciele grupy:</h3>  {% for teacher in group.teacher_set.all %}
+        <li>{{ teacher.name }}{% endfor %}
+        </li>
+
+
     <br>
 
+<h3>        Członkowie grupy: </h3> {% for child in group.child_set.all %}
+        <li>{{ child.name }}{% endfor %}
+        </li>
+
+
+    <br>
 
 <hr>
 <a href="/modify_group/{{ group.id }}/"> Edytuj grupe </a>

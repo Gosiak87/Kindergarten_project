@@ -6,20 +6,24 @@
 <form action="{% url 'show-child' child.id %}" method="POST">
 
     <label>
-        Name: {{ child.name }}
+         Imię i nazwisko  : {{ child.name }}
     </label>
     <br>
     <label>
-        Date of birth : {{ child.date_of_birth }}
+        Data urodzenia : {{ child.date_of_birth }}
     </label>
     <br>
     <label>
-       Group : {{ child.group}}
+        <a href="/show_group/{{ child.group.id}}/"> Grupa : {{ child.group }}</a>
     </label>
+    <br>
 
-<h2>{{ carer_.name }}</h2>
-
-
+     <label>
+       Rodzice :{% for carer in child.carers.all %}
+         <li>{{ carer.name }} {% endfor %}
+         </li>
+     </label>
+    <br>
 
 <hr>
 <a href="/modify_child/{{ child.id }}/"> Edytuj przedszkolaka </a>

@@ -33,7 +33,8 @@ class Child(models.Model):
     second_name = models.CharField(max_length=64, null=True, blank=True)
     last_name = models.CharField(max_length=64)
     date_of_birth = models.DateField(null=True)
-    group = models.ForeignKey("Group", on_delete=models.SET_NULL, null=True)
+    group = models.ForeignKey("Group", on_delete=models.SET_NULL, null=True,
+                              related_name="child_set")
     carers = models.ManyToManyField(Carer)
 
     @property
@@ -83,13 +84,23 @@ class Trip(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
     date = models.DateField()
-    trip_guardian = models.ManyToManyField(Teacher)
+    trip_guardians = models.ManyToManyField(Teacher)
+    members_of_trip = models.ManyToManyField(Child)
+
+    def __str__(self):
+        return self.name
 
 
-
+class PresenceList(models.Model):
+    child = models.ForeignKey(Child, on_delete=None)  # presence_list_set
+    day = models.DateTimeField()
+    present = models.NullBooleanField()
+#
 #
 # class InformationCard(models.Model):
-#     pass
+#     child = models.OneToOneField(Child, on_delete=models.SET_NULL, primary_key=True)
+#
+
 
 
 

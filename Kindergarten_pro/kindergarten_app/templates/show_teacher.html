@@ -1,20 +1,20 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h1> {{ teacher.name }} </h1>
+<h2> {{ teacher.name }} </h2>
 
 <form action="{% url 'show-teacher' teacher.id %}" method="POST">
 
     <label>
-        Name: {{ teacher.name }}
+        Imię i nazwisko: {{ teacher.name }}
     </label>
     <br>
     <label>
-        Group : {{ teacher.group }}
+        <a href="/show_group/{{ teacher.group.id}}/"> Grupa : {{ teacher.group }}</a>
     </label>
     <br>
     <label>
-       Type of Teacher : {{ teacher.get_type_of_teacher_display }}
+       Stanowisko : {{ teacher.get_type_of_teacher_display }}
     </label>
     <br>
 
@@ -23,7 +23,7 @@
     </label>
     <br>
     <label>
-       Number of phone : {{ teacher.phone_number }}
+       Numer telefonu: {{ teacher.phone_number }}
     </label>
     <br>
 

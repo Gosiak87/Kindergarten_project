@@ -1,8 +1,9 @@
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from .models import Child, Teacher, Group, Carer, Trip
-from .forms import ChildAddForm, CarerAddForm, TeacherAddForm, GroupAddForm, TripAddForm
+from .forms import ChildAddForm, CarerAddForm, TeacherAddForm, GroupAddForm, TripAddForm, PresenceListForm, LoginForm
 from django.urls import reverse
 
 
@@ -12,6 +13,32 @@ from django.urls import reverse
 class MainView(View):
     def get(self, request):
         return render(request, template_name="main.html")
+
+
+class UserLoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        ctx = {
+            "form": form
+        }
+        return render(request, template_name="user_login.html", context=ctx)
+
+    def post(self,request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponse("Udało się zalogować")
+            return HttpResponse("No nie koniecznie")
+
+
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect(reverse('index'))
 
 
 class AllChildrenView(View):
@@ -179,9 +206,9 @@ class AddGroupView(View):
         if form.is_valid():
             group = form.save()
 
-            return redirect(reverse('show-group', kwargs={'id': group.id}))
+            return redirect(reverse("show-group", kwargs={"id": group.id}))
         ctx = {
-            'form': form,
+            "form": form,
         }
         return render(request,
                       template_name="add_group.html",
@@ -238,3 +265,42 @@ class AddTripView(View):
         return render(request,
                       template_name="add_trip.html",
                       context=ctx)
+
+
+class PresenceChildView(View):
+
+    def get(self, request, child_id, date):
+        child = Child.objects.get(id=child_id)
+
+        form = PresenceListForm(initial={
+            "child": child.name,
+            "date": date,
+        })
+        ctx = {
+            "form": form,
+            "child_id": child_id,
+            "date": date
+        }
+        return render(
+            request,
+            template_name="presence.html",
+            context=ctx
+        )
+
+    def post(self, request, child_id, date):
+        form = PresenceListForm(request.POST)
+        if form.is_valid():
+            form = form.save()
+    #
+    #         child = Child.objects.get(id=child_id)
+    #         PresenceList.objects.create(child=child, present=present, day=day)
+    #     ctx = {
+    #         'form': form,
+    #         'student_id': student_id,
+    #         'date': date
+    #     }
+    #     return render(
+    #         request,
+    #         template_name='present.html',
+    #         context=ctx
+    #     )

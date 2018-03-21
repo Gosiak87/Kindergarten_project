@@ -1,12 +1,18 @@
 from django import forms
+from django.forms.widgets import TextInput
 
-from kindergarten_app.models import Child, Carer, Teacher, Group, Trip
+from kindergarten_app.models import Child, Carer, Teacher, Group, Trip, PresenceList
 
 
 class ChildAddForm(forms.ModelForm):
+
     class Meta:
         model = Child
         exclude = ("carers", )
+        widgets = {
+            'date_of_birth': TextInput(attrs={'placeholder': 'YYYY-MM-DD',
+                                              'class': 'date'}),
+        }
 
 
 class CarerAddForm(forms.ModelForm):
@@ -33,3 +39,14 @@ class TripAddForm(forms.ModelForm):
         fields = "__all__"
 
 
+class PresenceListForm(forms.ModelForm):
+    class Meta:
+        model = PresenceList
+        fields = "__all__"
+        widgets = {
+        'day': TextInput(attrs={'CheckboxSelectMultiple': ''}),
+    }
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Username", strip=True)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput)
