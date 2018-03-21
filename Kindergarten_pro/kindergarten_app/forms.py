@@ -39,14 +39,6 @@ class TripAddForm(forms.ModelForm):
         fields = "__all__"
 
 
-class PresenceListForm(forms.ModelForm):
-    class Meta:
-        model = PresenceList
-        fields = "__all__"
-        widgets = {
-        'day': TextInput(attrs={'CheckboxSelectMultiple': ''}),
-    }
-
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username", strip=True)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)

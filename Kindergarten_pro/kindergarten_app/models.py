@@ -92,9 +92,11 @@ class Trip(models.Model):
 
 
 class PresenceList(models.Model):
-    child = models.ForeignKey(Child, on_delete=None)  # presence_list_set
+    children = models.ManyToManyField(Child)
     day = models.DateTimeField()
-    present = models.NullBooleanField()
+    group = models.ForeignKey(Group, on_delete=None) # presencelist.group_set
+
+
 #
 #
 # class InformationCard(models.Model):

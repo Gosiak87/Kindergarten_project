@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+{% block content %}
+
+<form method="POST">
+
+<h2>{{ presence_list.group.set.all }}</h2>
+
+<h2>Lista obecności dnia {{ presence_list.day }}</h2>
+   {% csrf_token %}
+   {{ form.as_p }}
+   <input type="submit" value="Dodaj">
+
+</form>
+
+{% endblock %}

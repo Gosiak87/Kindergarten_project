@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 
 {% block content %}
+
 <h1> {{ group.name }} </h1>
 
 <form action="{% url 'show-group' group.id %}" method="POST">
@@ -17,11 +18,16 @@
         <li>{{ child.name }}{% endfor %}
         </li>
 
-
     <br>
 
+
+<a href="/add_presence_children/{{ group.id }}"> Dodaj listę obecności </a>
+<br>
+
+
+
 <hr>
-<a href="/modify_group/{{ group.id }}/"> Edytuj grupe </a>
+<a href="/modify_group/{{ group.id }}"> Edytuj grupe </a>
 
 <br>
 <a href="/all_groups/"> Pokaż wszystkie grupy </a>

@@ -3,7 +3,7 @@
 {% block content %}
 <h1> Dodawanie grupy </h1>
 
-<form action="{% url 'add-group' %}" method="POST">
+<form action method="POST">
    {% csrf_token %}
    {{ form.as_p }}
 

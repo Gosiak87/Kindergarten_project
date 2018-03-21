@@ -1,9 +1,14 @@
+import datetime
+
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
+from django.views.generic.edit import UpdateView, CreateView
+
+from kindergarten_app.models import PresenceList
 from .models import Child, Teacher, Group, Carer, Trip
-from .forms import ChildAddForm, CarerAddForm, TeacherAddForm, GroupAddForm, TripAddForm, PresenceListForm, LoginForm
+from .forms import ChildAddForm, CarerAddForm, TeacherAddForm, GroupAddForm, TripAddForm, LoginForm
 from django.urls import reverse
 
 
@@ -267,40 +272,81 @@ class AddTripView(View):
                       context=ctx)
 
 
-class PresenceChildView(View):
-
-    def get(self, request, child_id, date):
-        child = Child.objects.get(id=child_id)
-
-        form = PresenceListForm(initial={
-            "child": child.name,
-            "date": date,
-        })
-        ctx = {
+class PresenceChildrenView(View):
+    def get(self, request):
+        form = PresenceListForm()
+        ctx ={
             "form": form,
-            "child_id": child_id,
-            "date": date
         }
-        return render(
-            request,
-            template_name="presence.html",
-            context=ctx
-        )
+        return render(request,
+                      template_name="presence_children.html",
+                      context=ctx)
 
-    def post(self, request, child_id, date):
-        form = PresenceListForm(request.POST)
-        if form.is_valid():
-            form = form.save()
+
+class AddPresenceChildView(CreateView):
+    template_name = "add_presence.html"
+    model = PresenceList
+    success_url = "/"
+
+    fields = ['children']
+
+    def dispatch(self, request, *args, **kwargs):
+        self.group_id = kwargs.pop('group_id')
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        presence_list = form.save(commit=False)
+
+        group = Group.objects.get(pk=self.group_id)
+        presence_list.group = group
+        presence_list.day = datetime.date.today()
+        presence_list.save()
+
+        form.save_m2m()
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return '/show_group/{}'.format(self.group_id)
+
+
+class ShowPresenceListView(CreateView):
+    template_name = "show_presence.html"
+    model = PresenceList
+
+
+class ModifyChildView(UpdateView):
+    template_name = "modify_child.html"
+    model = Child
+    success_url = "/"
+    fields = '__all__'
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     self.child_id = kwargs.pop('child_id')
+    #     return super().dispatch(request, *args, **kwargs)
+    # #
+    # def form_valid(self, form):
+    #     modify_child = form.save(commit=False)
     #
-    #         child = Child.objects.get(id=child_id)
-    #         PresenceList.objects.create(child=child, present=present, day=day)
-    #     ctx = {
-    #         'form': form,
-    #         'student_id': student_id,
-    #         'date': date
-    #     }
-    #     return render(
-    #         request,
-    #         template_name='present.html',
-    #         context=ctx
-    #     )
+    #     modify_child = Child.objects.get(pk=self.child_id)
+    #     child.first_name = first_name
+    #     presence_list.day = datetime.date.today()
+    #     presence_list.save()
+    #
+    #     form.save_m2m()
+    #     return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return '/show_child/{}'.format(self.child_id)
+
+
+
+
+class ModifyCarerView(UpdateView):
+    pass
+    # def post(self, request, id):
+    #     child = Child.objects.get(id=id)
+    #
+    #     return redirect(reverse("show-child", kwargs={"id": child.id}))
+    #
+    #
+

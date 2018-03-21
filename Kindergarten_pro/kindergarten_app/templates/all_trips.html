@@ -8,14 +8,14 @@
 <ul>
     {% for trip in trips %}
 
-    <li><a href="trip">{{ trip.name }} </a> </li>
+    <li><a href="show_trip/{{ trip.id }}">{{ trip.name }} </a> </li>
 
     {% endfor %}
 
 <hr>
-     <br>
+    <br>
 
-                    <a href="/main/">Wróć do strony głównej </a>
+    <a href="/main/">Wróć do strony głównej </a>
     <br>
 
 </ul>

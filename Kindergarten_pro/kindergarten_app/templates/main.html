@@ -4,14 +4,37 @@
 <html lang="en">
 
 <head>
-<link rel="stylesheet" href="{% static "style/base.css" %}" />
+
 <title>{% block title %} Przedszkole Hobbitów {% endblock %}</title>
 </head>
 <h1> PRZEDSZKOLE HOBBITÓW </h1>
-<body>
+
 
 {% block content %}
+      <br>
+   <label>
+        <a href="/all_children"> Lista Dzieci</a>
 
+    </label>
+   <br>
+
+    <body>
+   <label>
+        <a href="/all_groups"> Lista Grup </a>
+
+    </label>
+   <br>
+   <label>
+        <a href="/all_teachers"> Lista Nauczycieli </a>
+
+    </label>
+
+      <br>
+   <label>
+        <a href="/all_trips"> Lista Wycieczek</a>
+
+    </label>
+   <br>
 {% endblock content %}
 
 

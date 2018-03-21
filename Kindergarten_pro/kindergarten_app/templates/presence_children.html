@@ -1,9 +1,10 @@
 {% extends "main.html" %}
 {% block content %}
 
-<form action="{% url 'present-child'  child_id date %}" method="POST">
+<form action="}" method="POST">
    {% csrf_token %}
-   {{ form }}
+
+   {{ form.as_table }}
    <input type="submit" value="Wybierz">
 
 </form>

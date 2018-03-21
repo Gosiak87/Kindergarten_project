@@ -14,7 +14,7 @@
     </label>
     <br>
     <label>
-        <a href="/show_group/{{ child.group.id}}/"> Grupa : {{ child.group }}</a>
+        <a href="/show_group/{{ child.group.id}}"> Grupa : {{ child.group }}</a>
     </label>
     <br>
 
@@ -22,17 +22,16 @@
        Rodzice :{% for carer in child.carers.all %}
          <li>{{ carer.name }} {% endfor %}
          </li>
-     </label>
-    <br>
+
 
 <hr>
-<a href="/modify_child/{{ child.id }}/"> Edytuj przedszkolaka </a>
+<a href="/modify_child/{{ child.id }}"> Edytuj przedszkolaka </a>
 <br>
-<a href="/all_children/"> Pokaż wszystkich przedszkolaków </a>
+<a href="/all_children"> Pokaż wszystkich przedszkolaków </a>
 <br>
 <hr>
 <br>
-<a href="/main/">Wróć do strony głównej</a>
+<a href="/main">Wróć do strony głównej</a>
 </br>
 
 

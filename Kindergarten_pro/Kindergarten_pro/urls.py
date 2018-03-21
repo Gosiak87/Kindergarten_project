@@ -14,32 +14,37 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.conf.urls import url
 from kindergarten_app.views import (
     MainView,
-    AllChildrenView, AddChildView, AllTeacherView, AllGroupsView, AddTeacherView, AddGroupView, ShowChildView, ShowTeacherView, ShowGroupView, AllTripsView, ShowTripView, AddTripView, PresenceChildView, UserLoginView, UserLogoutView)
+    AllChildrenView, AddChildView, AllTeacherView, AllGroupsView, AddTeacherView, AddGroupView, ShowChildView,
+    ShowTeacherView, ShowGroupView, AllTripsView, ShowTripView, AddTripView, UserLoginView,
+    UserLogoutView, ModifyChildView, PresenceChildrenView, AddPresenceChildView, ShowPresenceListView)
 
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url('^main', MainView.as_view()),
-    url('^all_children', AllChildrenView.as_view()),
-    url('^add_child', AddChildView.as_view(), name="add-child"),
-    url('^all_teacher', AllTeacherView.as_view()),
-    url('^add_teacher', AddTeacherView.as_view(), name="add-teacher"),
-    url('^all_group', AllGroupsView.as_view()),
-    url('^add_group', AddGroupView.as_view(), name="add-group"),
-    url('^show_child/(?P<id>(\d)+)', ShowChildView.as_view(), name="show-child"),
-    url('^show_teacher/(?P<id>(\d)+)', ShowTeacherView.as_view(), name="show-teacher"),
-    url('^show_group/(?P<id>(\d)+)', ShowGroupView.as_view(), name="show-group"),
-    url('^all_trips', AllTripsView.as_view()),
-    url('^show_trip/(?P<id>(\d)+)', ShowTripView.as_view(), name="show-trip"),
-    url('^add_trip', AddTripView.as_view(), name="add-trip"),
-    url(r'^child_presence/(?P<child_id>(\d)+)/(?P<date>([\d-])+)$',
-        PresenceChildView.as_view(), name="present-child"),
+    url(r'admin/', admin.site.urls),
+    url(r'^main$', MainView.as_view()),
+    url(r'^all_children$', AllChildrenView.as_view()),
+    url(r'^add_child$', AddChildView.as_view(), name="add-child"),
+    url(r'^all_teachers$', AllTeacherView.as_view()),
+    url(r'^add_teacher$', AddTeacherView.as_view(), name="add-teacher"),
+    url(r'^all_groups$', AllGroupsView.as_view()),
+    url(r'^add_group$', AddGroupView.as_view(), name="add-group"),
+    url(r'^show_child/(?P<id>(\d)+)$', ShowChildView.as_view(), name="show-child"),
+    url(r'^show_teacher/(?P<id>(\d)+)$', ShowTeacherView.as_view(), name="show-teacher"),
+    url(r'^show_group/(?P<id>(\d)+)$', ShowGroupView.as_view(), name="show-group"),
+    url(r'^all_trips$', AllTripsView.as_view()),
+    url(r'^show_trip/(?P<id>(\d)+)$', ShowTripView.as_view(), name="show-trip"),
+    url(r'^add_trip$', AddTripView.as_view(), name="add-trip"),
+    #url(r'^child_presence/(?P<child_id>(\d)+)/(?P<date>([\d-])+)$',
+      #  PresenceChildView.as_view(), name="present-child"),
     url(r'^login$', UserLoginView.as_view(), name="login"),
     url(r'^logout$', UserLogoutView.as_view(), name="logout"),
+    url(r'^modify_child/(?P<pk>(\d)+)/$', ModifyChildView.as_view(), name="modify-child"),
+    url(r'^presence_children$', PresenceChildrenView.as_view()),
+    url(r'^add_presence_children/(?P<group_id>(\d)+)/$', AddPresenceChildView.as_view()),
+    #url(r'^show_presence_list/(?P<id>(\d)+)$', ShowPresenceListView.as_view(), name="show-presence")
 
     #url(r'^child/(?P<child_id>(\d)+)', ChildView.as_view(),
        # name="student-group"),

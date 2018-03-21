@@ -3,8 +3,9 @@
 {% block content %}
 <h1> Dodawanie dziecka </h1>
 
-<form action="{% url 'add-child' %}" method="POST">
+<form  method="POST">
    {% csrf_token %}
+
    {{ form.as_p }}
 
    <h5>Carer 1:</h5>

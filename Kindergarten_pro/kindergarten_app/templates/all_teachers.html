@@ -8,7 +8,8 @@
 <ul>
     {% for teacher in teachers %}
 
-    <li><a href="teacher">{{ teacher.name }} </a> </li>
+    <li><a href="show_teacher/{{ teacher.id }}">{{ teacher.name }} </a> </li>
+
 
     {% endfor %}
 

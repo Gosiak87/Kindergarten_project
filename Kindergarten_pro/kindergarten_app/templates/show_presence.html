@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> {{ group.name }} </h1>
+
+<form action="{% url 'show-presence' group.id %}" method="POST">
+
+
+ {% csrf_token %}
+   {{ form }}
+
+
+
+<br>
+<a href="/main/">Wróć do strony głównej</a>
+</br>
+
+
+
+
+</form>
+
+{% endblock %}

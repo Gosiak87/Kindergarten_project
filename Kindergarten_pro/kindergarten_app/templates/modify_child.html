@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> Edytowanie dziecka </h1>
+
+<form action method="POST">
+   {{ form.as_p }}
+    {% csrf_token %}
+</form>
+
+   <input type="submit" value="Edytuj">
+    <hr>
+    <br>
+    <a href="add_carer/{{ carer.id }}" > {{ carer.name }} </a> </li>
+
+
+                    <a href="/main">Wróć do strony głównej </a>
+    <br>
+
+{% endblock %}
