@@ -1,52 +1,27 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h2> {{ trip.name }} </h2>
+    <h2> {{ trip.name }} </h2>
 
-<form action="{% url 'show-trip' trip.id %}" method="POST">
-
-    <label>
-        Nazwa : {{ trip.name }}
-    </label>
-    <br>
-    <label>
-       Data : {{ trip.date }}
-    </label>
-    <br>
-    <label>
-        Opis : {{ trip.description }}
-    </label>
-    <br>
-
-
-    <h3> Opiekunowie : </h3>
-       {% for guardian in trip.trip_guardians.all %}
+    <form action="{% url 'show-trip' trip.id %}" method="POST">
+        <label>
+            Data : {{ trip.date }}
+        </label>
+        <label>
+            Opis : {{ trip.description }}
+        </label>
+        <h3> Opiekunowie : </h3>
+        {% for guardian in trip.trip_guardians.all %}
             <li>    {{ guardian.name }}{% endfor %}
-            </li>
-
-    <br>
-
-    <h3> Wycieczkowicze </h3>
-        {% for member in trip.members_of_trip.all %}
-        <li>{{ member.name }}{% endfor %}
         </li>
-    </label>
-    <br>
-
-<hr>
-<a href="/modify_trip/{{ trip.id }}/"> Edytuj wycieczka </a>
-<br>
-<a href="/all_trips"> Pokaż wszystkie wycieczki </a>
-<br>
-
-<br>
-<a href="/main">Wróć do strony głównej</a>
-</br>
-
-
-
-
-
-</form>
-
+        <h3> Wycieczkowicze </h3>
+        {% for member in trip.members_of_trip.all %}
+            <li>{{ member.name }}{% endfor %}
+        </li>
+        </label>
+        <hr>
+        <a href="/modify_trip/{{ trip.id }}/" class="btn btn-info"> Edytuj wycieczke </a>
+        <a href="/all_trips" class="btn btn-info"> Pokaż wszystkie wycieczki </a>
+        <a href="/main" class="btn btn-info">Wróć do strony głównej</a>
+    </form>
 {% endblock %}

@@ -1,25 +1,15 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h1> Wszystkie grupy w przedszkolu </h1>
-
-
-<h2></h2>
-<ul>
-    {% for group in groups %}
-
-    <li><a href="show_group/{{ group.id }}">{{ group.name }} </a> </li>
-
-    {% endfor %}
-
-<hr>
-     <br>
-
-                    <a href="/main/">Wróć do strony głównej ></a>
-    <br>
-
-
-</ul>
-
-
+    <h1> Wszystkie grupy w przedszkolu </h1>
+    <h2></h2>
+    <ul class="list-group">
+        {% for group in groups %}
+            <li class="list-group-item list-group-item-info"><a href="show_group/{{ group.id }}">{{ group.name }} </a></li>
+        {% endfor %}
+        <hr>
+        <br>
+        <a href="/add_group" class="btn btn-info" role="button">Dodaj grupe</a>
+        <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
+    </ul>
 {% endblock %}

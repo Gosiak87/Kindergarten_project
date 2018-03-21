@@ -4,40 +4,38 @@
 <html lang="en">
 
 <head>
-
-<title>{% block title %} Przedszkole Hobbitów {% endblock %}</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>{% block title %} Przedszkole Superbohaterów{% endblock %}</title>
 </head>
-<h1> PRZEDSZKOLE HOBBITÓW </h1>
-
-
+{% load static %}
+{% block header %}
+<img src='{% static 'super-heroes-trivia-category-comic-trivia-night.jpg' %}' height="150px" width="300">
+<h1> Przedszkole Superbohaterów </h1>
+{% endblock %}
 {% block content %}
-      <br>
-   <label>
-        <a href="/all_children"> Lista Dzieci</a>
-
-    </label>
-   <br>
-
-    <body>
-   <label>
-        <a href="/all_groups"> Lista Grup </a>
-
-    </label>
-   <br>
-   <label>
-        <a href="/all_teachers"> Lista Nauczycieli </a>
-
-    </label>
-
-      <br>
-   <label>
-        <a href="/all_trips"> Lista Wycieczek</a>
-
-    </label>
-   <br>
-{% endblock content %}
-
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
+                <div id="sidebar" class="well sidebar-nav">
+                    <h5><i class="glyphicon glyphicon-home"></i>
+                        <small><b>PRZEDSZKOLE</b></small>
+                    </h5>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="/all_children"> Lista Przedszkolaków</a></li>
+                        <li><a href="/all_groups"> Lista Grup </a></li>
+                        <li><a href="/all_teachers"> Lista Nauczycieli </a></li>
+                        <li><a href="/all_trips"> Lista Wycieczek</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!-- Content Here -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
 </body>
-
 </html>

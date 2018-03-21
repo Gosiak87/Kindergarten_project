@@ -1,26 +1,18 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h1> Dodawanie dziecka </h1>
-
-<form  method="POST">
-   {% csrf_token %}
-
-   {{ form.as_p }}
-
-   <h5>Carer 1:</h5>
-   {{ carer_1_form.as_p }}
-
-   <h5>Carer 2:</h5>
-   {{ carer_2_form.as_p }}
-
-
-
-   <input type="submit" value="Dodaj wszystko">
-<hr>
- <br>
-
-                    <a href="/main/">Wróć do strony głównej </a>
-    <br>
-
+    <h1> Dodawanie dziecka </h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h5>Carer 1:</h5>
+        {{ carer_1_form.as_p }}
+        <h5>Carer 2:</h5>
+        {{ carer_2_form.as_p }}
+        <button type="submit" clas="btn btn-info">Dodaj wszystko</button>
+        <hr>
+        <br>
+        <a href="/main" class="btn btn-info">Wróć do strony głównej </a>
+        <br>
+    </form>
 {% endblock %}

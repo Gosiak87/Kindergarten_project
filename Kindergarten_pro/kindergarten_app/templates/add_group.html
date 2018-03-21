@@ -1,22 +1,14 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h1> Dodawanie grupy </h1>
-
-<form action method="POST">
-   {% csrf_token %}
-   {{ form.as_p }}
-
-
-
-   <input type="submit" value="Dodaj grupe">
-<hr>
- <br>
-
-                    <a href="/main/">Wróć do strony głównej </a>
-    <br>
-
-
-</form>
-
+    <h1> Dodawanie grupy </h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-info">Dodaj grupe</button>
+        <hr>
+        <br>
+        <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
+        <br>
+    </form>
 {% endblock %}

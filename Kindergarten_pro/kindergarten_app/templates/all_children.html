@@ -1,23 +1,16 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h1> Wszystkie dzieci w przedszkolu </h1>
-
-
-<h2></h2>
-<ul>
-    {% for child in children %}
-
-    <li><a href="show_child/{{ child.id }}" > {{ child.name }} </a> </li>
-
-    {% endfor %}
-<hr>
-    <br>
-
-                    <a href="/main/">Wróć do strony głównej </a>
-    <br>
-
-</ul>
-
-
+    <h1> Wszystkie dzieci w przedszkolu </h1>
+    <h2></h2>
+    <ul class="list-group">
+        {% for child in children %}
+            <li class="list-group-item list-group-item-info"><a href="show_child/{{ child.id }}"> {{ child.name }} </a></li>
+        {% endfor %}
+        <hr>
+        <br>
+        <a href="/add_child" class="btn btn-info" role="button">Dodaj przedszkolaka </a>
+        <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
+        <br>
+    </ul>
 {% endblock %}

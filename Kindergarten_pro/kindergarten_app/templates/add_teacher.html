@@ -1,23 +1,14 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h1> Dodawanie nauczyciela </h1>
-
-<form action method="POST">
-   {% csrf_token %}
-   {{ form.as_p }}
-
-
-
-   <input type="submit" value="Dodaj nauczyciela">
-
-<hr>
- <br>
-
-    <a href="/main/">Wróć do strony głównej </a>
-    <br>
-
-
-</form>
-
+    <h1> Dodawanie nauczyciela </h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-info">Dodaj nauczyciela</button>
+        <hr>
+        <br>
+        <a href="/main" class="btn btn-info">Wróć do strony głównej </a>
+        <br>
+    </form>
 {% endblock %}

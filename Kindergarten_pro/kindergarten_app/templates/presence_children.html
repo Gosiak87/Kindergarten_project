@@ -1,12 +1,8 @@
 {% extends "main.html" %}
 {% block content %}
-
-<form action="}" method="POST">
-   {% csrf_token %}
-
-   {{ form.as_table }}
-   <input type="submit" value="Wybierz">
-
-</form>
-
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit" class="btn btn-info">Wybierz</button>
+    </form>
 {% endblock %}

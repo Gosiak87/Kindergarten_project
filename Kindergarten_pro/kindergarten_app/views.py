@@ -335,14 +335,31 @@ class ModifyChildView(UpdateView):
     #     form.save_m2m()
     #     return redirect(self.get_success_url())
 
-    def get_success_url(self):
-        return '/show_child/{}'.format(self.child_id)
+    # def get_success_url(self):
+    #     return '/show_child/{}'.format(self.child_id)
+
+    #redirect(reverse("show-child", kwargs={"id": child.id}))
 
 
+class ModifyTeacherView(UpdateView):
+    template_name = "modify_teacher.html"
+    model = Teacher
+    success_url = "/"
+    fields = '__all__'
 
 
-class ModifyCarerView(UpdateView):
-    pass
+class ModifyTripView(UpdateView):
+    template_name = "modify_trip.html"
+    model = Trip
+    success_url = "/"
+    fields = '__all__'
+
+
+class ModifyGroupView(UpdateView):
+    template_name = "modify_group.html"
+    model = Group
+    success_url = "/"
+    fields = '__all__'
     # def post(self, request, id):
     #     child = Child.objects.get(id=id)
     #
