@@ -20,12 +20,12 @@ from kindergarten_app.views import (
     AllChildrenView, AddChildView, AllTeacherView, AllGroupsView, AddTeacherView, AddGroupView, ShowChildView,
     ShowTeacherView, ShowGroupView, AllTripsView, ShowTripView, AddTripView, UserLoginView,
     UserLogoutView, ModifyChildView, PresenceChildrenView, AddPresenceChildView, ShowPresenceListView,
-    ModifyTripView, ModifyGroupView, ModifyTeacherView)
+    ModifyTripView, ModifyGroupView, ModifyTeacherView, DeleteChildView)
 
 
 urlpatterns = [
     url(r'admin/', admin.site.urls),
-    url(r'^main$', MainView.as_view()),
+    url(r'^main$', MainView.as_view(), name="main"),
     url(r'^all_children$', AllChildrenView.as_view()),
     url(r'^add_child$', AddChildView.as_view(), name="add-child"),
     url(r'^all_teachers$', AllTeacherView.as_view()),
@@ -48,5 +48,6 @@ urlpatterns = [
     url(r'^modify_teacher/(?P<pk>(\d)+)/$', ModifyTeacherView.as_view()),
     url(r'^presence_children$', PresenceChildrenView.as_view()),
     url(r'^add_presence_children/(?P<group_id>(\d)+)/$', AddPresenceChildView.as_view()),
+    url(r'^delete_child/(?P<pk>(\d)+)/$', DeleteChildView.as_view())
 
 ]

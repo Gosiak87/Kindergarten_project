@@ -12,7 +12,7 @@
 {% load static %}
 {% block header %}
 <img src='{% static 'super-heroes-trivia-category-comic-trivia-night.jpg' %}' height="150px" width="300">
-<h1> Przedszkole Superbohaterów </h1>
+<h1> PRZEDSZKOLE SUPERBOCHATERÓW </h1>
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -24,10 +24,19 @@
                         <small><b>PRZEDSZKOLE</b></small>
                     </h5>
                     <ul class="nav nav-pills nav-stacked">
+
                         <li class="active"><a href="/all_children"> Lista Przedszkolaków</a></li>
                         <li><a href="/all_groups"> Lista Grup </a></li>
                         <li><a href="/all_teachers"> Lista Nauczycieli </a></li>
                         <li><a href="/all_trips"> Lista Wycieczek</a></li>
+                         {% if request.user.is_authenticated %}
+        Jesteś zalogowany jako: {{ request.user.username }}
+                        <li><a href="/logout"> Wyloguj się</a></li>
+                        {% else %}
+                        <li><a href="/login"> Zaloguj się</a></li>
+                         {% endif %}
+
+
                     </ul>
                 </div>
             </div>

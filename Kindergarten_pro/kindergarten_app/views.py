@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
-from django.views.generic.edit import UpdateView, CreateView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
 
 from kindergarten_app.models import PresenceList
 from .models import Child, Teacher, Group, Carer, Trip
@@ -31,19 +31,15 @@ class UserLoginView(View):
     def post(self,request):
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return HttpResponse("Udało się zalogować")
-            return HttpResponse("No nie koniecznie")
+            return redirect(reverse('main'))
+        return render(request, template_name="user_login.html",
+                      context={'form':form})
 
 
 class UserLogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect(reverse('index'))
+        return redirect(reverse("main"))
 
 
 class AllChildrenView(View):
@@ -72,12 +68,14 @@ class ShowChildView(View):
                       template_name="show_child.html",
                       context=ctx)
 
+class DeleteChildView(DeleteView):
+    model = Child
+    template_name = "delete.html"
+    success_url = '/'
+    fields = '__all__'
 
-class DeleteChildView(View):
-    def get(self, request, id):
-        child = Child.objects.get(id=id)
-        child.delete()
-        return HttpResponse("Przedszkolak został usunięty")
+    def get_success_url(self):
+         return "/all_children"
 
 
 class AddChildView(View):
@@ -317,26 +315,10 @@ class ShowPresenceListView(CreateView):
 class ModifyChildView(UpdateView):
     template_name = "modify_child.html"
     model = Child
-    success_url = "/"
     fields = '__all__'
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     self.child_id = kwargs.pop('child_id')
-    #     return super().dispatch(request, *args, **kwargs)
-    # #
-    # def form_valid(self, form):
-    #     modify_child = form.save(commit=False)
-    #
-    #     modify_child = Child.objects.get(pk=self.child_id)
-    #     child.first_name = first_name
-    #     presence_list.day = datetime.date.today()
-    #     presence_list.save()
-    #
-    #     form.save_m2m()
-    #     return redirect(self.get_success_url())
-
-    # def get_success_url(self):
-    #     return '/show_child/{}'.format(self.child_id)
+    def get_success_url(self):
+         return "/show_child/{}".format(self.object.pk)
 
     #redirect(reverse("show-child", kwargs={"id": child.id}))
 
@@ -347,6 +329,9 @@ class ModifyTeacherView(UpdateView):
     success_url = "/"
     fields = '__all__'
 
+    def get_success_url(self):
+         return "/show_teacher/{}".format(self.object.pk)
+
 
 class ModifyTripView(UpdateView):
     template_name = "modify_trip.html"
@@ -354,16 +339,16 @@ class ModifyTripView(UpdateView):
     success_url = "/"
     fields = '__all__'
 
+    def get_success_url(self):
+         return "/show_trip/{}".format(self.object.pk)
+
 
 class ModifyGroupView(UpdateView):
     template_name = "modify_group.html"
     model = Group
     success_url = "/"
     fields = '__all__'
-    # def post(self, request, id):
-    #     child = Child.objects.get(id=id)
-    #
-    #     return redirect(reverse("show-child", kwargs={"id": child.id}))
-    #
-    #
+
+    def get_success_url(self):
+         return "/show_group/{}".format(self.object.pk)
 

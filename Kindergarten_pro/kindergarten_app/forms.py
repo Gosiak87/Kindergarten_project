@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
 from django.forms.widgets import TextInput
 
 from kindergarten_app.models import Child, Carer, Teacher, Group, Trip, PresenceList
@@ -42,3 +44,10 @@ class TripAddForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username", strip=True)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
+
+    def clean(self):
+        username = self.cleaned_data["username"]
+        password = self.cleaned_data["password"]
+        user = authenticate(username=username, password=password)
+        if not user:
+            raise ValidationError("User lub haslo niepoprawne")
