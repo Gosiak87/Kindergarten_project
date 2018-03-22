@@ -1,43 +1,41 @@
 {% extends "main.html" %}
 
 {% block content %}
-<h2> {{ teacher.name }} </h2>
+    <h2> {{ teacher.name }} </h2>
 
-<form action="{% url 'show-teacher' teacher.id %}" method="POST">
+    <form action="{% url 'show-teacher' teacher.id %}" method="POST">
 
-    <label>
-        Imię i nazwisko: {{ teacher.name }}
-    </label>
-    <br>
-    <label>
-        <a href="/show_group/{{ teacher.group.id}}/"> Grupa : {{ teacher.group }}</a>
-    </label>
-    <br>
-    <label>
-       Stanowisko : {{ teacher.get_type_of_teacher_display }}
-    </label>
-    <br>
+        <label>
+            Imię i nazwisko: {{ teacher.name }}
+        </label>
+        <br>
+        <label>
+            <a href="/show_group/{{ teacher.group.id }}/"> Grupa : {{ teacher.group }}</a>
+        </label>
+        <br>
+        <label>
+            Stanowisko : {{ teacher.get_type_of_teacher_display }}
+        </label>
+        <br>
 
-    <label>
-       Email : {{ teacher.email }}
-    </label>
-    <br>
-    <label>
-       Numer telefonu: {{ teacher.phone_number }}
-    </label>
-    <br>
+        <label>
+            Email : {{ teacher.email }}
+        </label>
+        <br>
+        <label>
+            Numer telefonu: {{ teacher.phone_number }}
+        </label>
+        <br>
 
-<hr>
-<a href="/modify_teacher/{{ teacher.id }}/" class="btn btn-info" role="button"> Edytuj nauczyciela </a>
+        <hr>
+        <a href="/modify_teacher/{{ teacher.id }}/" class="btn btn-info" role="button"> Edytuj nauczyciela </a>
+        <a href="/delete_teacher/{{ teacher.id }}" class="btn btn-info"> Usuń nauczyciela </a>
+        <a href="/all_teachers" class="btn btn-info" role="button"> Pokaż wszystkich nauczycieli </a>
 
-<a href="/all_teachers" class="btn btn-info" role="button"> Pokaż wszystkich nauczycieli </a>
-
-<a href="/main" class="btn btn-info" role="button">Wróć do strony głównej</a>
-
-
+        <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej</a>
 
 
 
-</form>
+    </form>
 
 {% endblock %}

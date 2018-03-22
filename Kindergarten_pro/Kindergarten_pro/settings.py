@@ -125,3 +125,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+
+
+EMAIL_HOST = 'smtp.poczta.onet.pl'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'prrzedszkolecl@onet.pl'
+EMAIL_HOST_PASSWORD = 'PrzedszkoleCL2018'
+EMAIL_USE_SSL = True

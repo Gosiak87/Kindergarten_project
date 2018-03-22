@@ -1,12 +1,24 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> {{ group.name }} </h1>
-    <form action="{% url 'show-presence' group.id %}" method="POST">
-        {% csrf_token %}
-        {{ form }}
+    <h1> {{ object}} </h1>
+
+
+        {{ object.group.name }}
+<ul>
+        {% for child in presence_list %}
+            <li>{{ child.name }} {% if child.present %}Był{% else %}Może nie płacić child.present }}</li>
+        {% endfor %}
+</ul>
+        <ul>
+        {% for presence_list in presence_lists %}
+            <li>
+            {{ presence_list.id }} - {{ presence_list.day }}
+            </li>
+        {% endfor %}
+        </ul>
         <br>
         <a href="/main" class="btn btn-info">Wróć do strony głównej</a>
         </br>
-    </form>
+
 {% endblock %}

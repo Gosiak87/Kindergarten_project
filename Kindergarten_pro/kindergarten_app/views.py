@@ -1,14 +1,16 @@
 import datetime
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
-
+from django.views.generic.detail import DetailView
 from kindergarten_app.models import PresenceList
 from .models import Child, Teacher, Group, Carer, Trip
-from .forms import ChildAddForm, CarerAddForm, TeacherAddForm, GroupAddForm, TripAddForm, LoginForm
+from .forms import ChildAddForm, CarerAddForm, TeacherAddForm, GroupAddForm, TripAddForm, LoginForm, PresenceListForm
 from django.urls import reverse
 
 
@@ -28,12 +30,12 @@ class UserLoginView(View):
         }
         return render(request, template_name="user_login.html", context=ctx)
 
-    def post(self,request):
-        form = LoginForm(request.POST)
+    def post(self, request):
+        form = LoginForm(request.POST, request=request)
         if form.is_valid():
             return redirect(reverse('main'))
         return render(request, template_name="user_login.html",
-                      context={'form':form})
+                      context={'form': form})
 
 
 class UserLogoutView(View):
@@ -68,6 +70,7 @@ class ShowChildView(View):
                       template_name="show_child.html",
                       context=ctx)
 
+
 class DeleteChildView(DeleteView):
     model = Child
     template_name = "delete.html"
@@ -76,6 +79,36 @@ class DeleteChildView(DeleteView):
 
     def get_success_url(self):
          return "/all_children"
+
+
+class DeleteGroupView(DeleteView):
+    model = Group
+    template_name = "delete.html"
+    success_url = '/'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return "/all_groups"
+
+
+class DeleteTeacherView(DeleteView):
+    model = Teacher
+    template_name = "delete.html"
+    success_url = '/'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return "/all_teachers"
+
+
+class DeleteTripView(DeleteView):
+    model = Trip
+    template_name = "delete.html"
+    success_url = '/'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return "/all_trips"
 
 
 class AddChildView(View):
@@ -270,23 +303,23 @@ class AddTripView(View):
                       context=ctx)
 
 
-class PresenceChildrenView(View):
-    def get(self, request):
-        form = PresenceListForm()
-        ctx ={
-            "form": form,
-        }
-        return render(request,
-                      template_name="presence_children.html",
-                      context=ctx)
+# class PresenceChildrenView(View):
+#     def get(self, request):
+#         form = PresenceListForm()
+#         ctx ={
+#             "form": form,
+#         }
+#         return render(request,
+#                       template_name="presence_children.html",
+#                       context=ctx)
 
 
 class AddPresenceChildView(CreateView):
     template_name = "add_presence.html"
     model = PresenceList
+    form_class = PresenceListForm
     success_url = "/"
 
-    fields = ['children']
 
     def dispatch(self, request, *args, **kwargs):
         self.group_id = kwargs.pop('group_id')
@@ -307,9 +340,25 @@ class AddPresenceChildView(CreateView):
         return '/show_group/{}'.format(self.group_id)
 
 
-class ShowPresenceListView(CreateView):
+class ShowPresenceView(DetailView):
     template_name = "show_presence.html"
     model = PresenceList
+    modelform = PresenceListForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        presence_lists = self.object.group.presencelist_set.exclude(id=self.object.id).order_by('day')
+        all_children = self.object.group.child_set.all()
+        present_children = self.object.children.all()
+
+        for child in all_children:
+            if child in present_children:
+                child.present = True
+
+        context.update({
+            'presence_list': all_children,
+            'presence_lists': presence_lists})
+        return context
 
 
 class ModifyChildView(UpdateView):
@@ -352,3 +401,43 @@ class ModifyGroupView(UpdateView):
     def get_success_url(self):
          return "/show_group/{}".format(self.object.pk)
 
+
+class SendMailView(View):
+    def get(self, request):
+        send_mail(
+            'Płatność za czesne',
+            'Należność.',
+            'prrzedszkolecl@onet.pl',
+            ['prrzedszkolecl@onet.pl'],
+            fail_silently=False,
+        )
+        return HttpResponse('Wyslalem')
+
+
+class ShowPaymentView(DetailView):
+    template_name = "show_payment.html"
+    model = Child
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowPaymentView, self).get_context_data()
+
+        # dziecko w grupie wyciagnij grupe dziecka
+        group = self.object.group
+        # listy to
+        presence_lists = group.presence_list_set.all()
+
+        counter = 0
+
+        for presence_list in presence_lists:
+            if self.object in presence_list.children.all():
+                counter += 1
+
+        payment = 1500
+        payment = payment - counter * 10
+
+        context.update({
+            'presence_lists': presence_lists,
+            'payment': payment
+
+        })
+        return context

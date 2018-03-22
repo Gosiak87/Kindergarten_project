@@ -11,15 +11,15 @@
 </head>
 {% load static %}
 {% block header %}
-<img src='{% static 'super-heroes-trivia-category-comic-trivia-night.jpg' %}' height="150px" width="300">
-<h1> PRZEDSZKOLE SUPERBOCHATERÓW </h1>
+<img src='{% static 'super-heroes-trivia-category-comic-trivia-night.jpg' %}' height="150px" width="300" ALIGN="LEFT" >
+<h1> PRZEDSZKOLE SUPERBOHATERÓW </h1>
 {% endblock %}
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
-                <div id="sidebar" class="well sidebar-nav">
+                <div id="header" class="well header-nav">
                     <h5><i class="glyphicon glyphicon-home"></i>
                         <small><b>PRZEDSZKOLE</b></small>
                     </h5>
@@ -30,11 +30,17 @@
                         <li><a href="/all_teachers"> Lista Nauczycieli </a></li>
                         <li><a href="/all_trips"> Lista Wycieczek</a></li>
                          {% if request.user.is_authenticated %}
-        Jesteś zalogowany jako: {{ request.user.username }}
-                        <li><a href="/logout"> Wyloguj się</a></li>
+                             <li><a href="/logout"> Wyloguj się</a></li>
                         {% else %}
                         <li><a href="/login"> Zaloguj się</a></li>
                          {% endif %}
+
+                        {% if request.user.is_authenticated %}
+                            <li>Jesteś zalogowany jako: {{ request.user.username }}
+</li>
+                        {% endif %}
+
+
 
 
                     </ul>
