@@ -4,12 +4,14 @@
     <h3 style="color: #17a2b8;"> {{ trip.name }} </h3>
     <form action="{% url 'show-trip' trip.id %}" method="POST">
         <label>Data :{{ trip.date }}</label>
+    <br>
         <label>Opis : {{ trip.description }}</label>
-        <h3> Opiekunowie : </h3>
+        <h4> Opiekunowie : </h4>
         {% for guardian in trip.trip_guardians.all %}
             <li>{{ guardian.name }}</li>
         {% endfor %}
-        <h3> Wycieczkowicze </h3>
+    <br>
+        <h4> Wycieczkowicze </h4>
         {% for member in trip.members_of_trip.all %}
             <li>{{ member.name }}</li>
         {% endfor %}

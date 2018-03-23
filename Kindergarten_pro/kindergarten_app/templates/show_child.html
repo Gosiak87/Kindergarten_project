@@ -10,7 +10,7 @@
         <br>
         <label>Rodzice :
             {% for carer in child.carers.all %}
-                {{ carer.name }}
+                <li> {{ carer.name }}</li>
             {% endfor %}
         </label>
     </form>

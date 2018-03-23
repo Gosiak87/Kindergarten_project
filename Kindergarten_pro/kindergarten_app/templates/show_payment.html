@@ -1,13 +1,11 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h3 style="color: #17a2b8;"> {{ object.name }}</h3>
-    <form action="{% url 'show-payment' pk %}" method="POST">
-        <h3> Przedszkolak: </h3>
+    <h3 style="color: #17a2b8;"> Płatność za marzec </h3>
+        <h3> Przedszkolak: {{ object.name }}</h3>
         <br>
-        <h3> Kwota do zapłaty : </h3>
+        <h3> Kwota do zapłaty : {{ payment }}</h3>
         <br>
         <a href="/send_mail" class="btn btn-info"> Wyslij informacje o płatności  </a>
         <a href="/main" class="btn btn-info">Wróć do Strony Głównej</a>
-    </form>
 {% endblock %}

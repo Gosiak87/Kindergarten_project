@@ -51,7 +51,7 @@ urlpatterns = [
     url(r'^delete_teacher/(?P<pk>(\d)+)/$', DeleteTeacherView.as_view()),
     url(r'^delete_trip/(?P<pk>(\d)+)/$', DeleteTripView.as_view()),
     url(r'^send_mail/$', SendMailView.as_view(), name='send-mail'),
-    url(r'^show_payment/(?P<pk>(\d)+)$', ShowPaymentView.as_view(), name='payment'),
+    url(r'^show_payment/(?P<pk>(\d)+)$', ShowPaymentView.as_view(), name='show-payment'),
     url(r'^show_presence/(?P<pk>(\d)+)/$', ShowPresenceView.as_view(), name="presence"),
     url(r'^all_presence_lists', AllPresencesView.as_view()),
 

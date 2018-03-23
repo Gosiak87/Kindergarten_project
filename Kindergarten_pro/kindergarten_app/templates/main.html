@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+{% csrf_token %}
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -62,5 +62,10 @@
 {% endblock %}
 {% block content %}
 {% endblock %}
+<br>
+        <h3 style="color: #17a2b8;"> zdjęcie grupowe</h3 style="color: #17a2b8;">
+
+    <img src='{% static 'zdjecie_grupowe.jpg' %}' height="500px" width="1300">
+
 </body>
 </html>

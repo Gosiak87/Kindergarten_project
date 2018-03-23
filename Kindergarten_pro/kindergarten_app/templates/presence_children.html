@@ -1,8 +1,0 @@
-{% extends "main.html" %}
-{% block content %}
-    <form method="post" class="post-form">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit" class="btn btn-info">Wybierz</button>
-    </form>
-{% endblock %}

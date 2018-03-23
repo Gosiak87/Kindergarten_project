@@ -11,7 +11,7 @@ from django.views.generic.detail import DetailView
 from kindergarten_app.models import PresenceList
 from .models import Child, Teacher, Group, Carer, Trip
 from .forms import ChildAddForm, CarerAddForm, TeacherAddForm, GroupAddForm, TripAddForm, LoginForm, PresenceListForm
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 
 # Create your views here.
@@ -75,7 +75,7 @@ class DeleteChildView(DeleteView):
     model = Child
     template_name = "delete.html"
     success_url = '/'
-    fields = '__all__'
+    #fields = '__all__'
 
     def get_success_url(self):
          return "/all_children"
@@ -304,23 +304,11 @@ class AddTripView(View):
                       context=ctx)
 
 
-# class PresenceChildrenView(View):
-#     def get(self, request):
-#         form = PresenceListForm()
-#         ctx ={
-#             "form": form,
-#         }
-#         return render(request,
-#                       template_name="presence_children.html",
-#                       context=ctx)
-
-
 class AddPresenceChildView(CreateView):
     template_name = "add_presence.html"
     model = PresenceList
     form_class = PresenceListForm
     success_url = "/"
-
 
     def dispatch(self, request, *args, **kwargs):
         self.group_id = kwargs.pop('group_id')
@@ -380,6 +368,7 @@ class ModifyChildView(UpdateView):
     template_name = "modify_child.html"
     model = Child
     fields = '__all__'
+    fields = '__all__'
 
     def get_success_url(self):
          return "/show_child/{}".format(self.object.pk)
@@ -421,7 +410,7 @@ class SendMailView(View):
     def get(self, request):
         send_mail(
             'Płatność za czesne',
-            'Należność 1500',
+            'Prosimy opłacić do 10 marca',
             'prrzedszkolecl@onet.pl',
             ['prrzedszkolecl@onet.pl'],
             fail_silently=False,
@@ -439,7 +428,7 @@ class ShowPaymentView(DetailView):
         # dziecko w grupie wyciagnij grupe dziecka
         group = self.object.group
         # listy to
-        presence_lists = group.presence_list_set.all()
+        presence_lists = group.presencelist_set.all()
 
         counter = 0
 
@@ -447,8 +436,10 @@ class ShowPaymentView(DetailView):
             if self.object in presence_list.children.all():
                 counter += 1
 
-        payment = 1500
-        payment = payment - counter * 10
+        base_payment = 15000
+        day_payment = 100
+
+        payment = base_payment - counter * day_payment
 
         context.update({
             'presence_lists': presence_lists,

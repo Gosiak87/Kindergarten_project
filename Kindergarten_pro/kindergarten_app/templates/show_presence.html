@@ -5,7 +5,7 @@
     {{ object.group.name }}
     <ul>
         {% for child in presence_list %}
-            <li>{{ child.name }} {% if child.present %}Był{% else %}Może nie płacić child.present }}{% endif %}</li>
+            <li>{{ child.name }} {% if child.present %}Był{% else %}Może nie płacić {{ child.present }}{% endif %}</li>
         {% endfor %}
     </ul>
     <ul>
