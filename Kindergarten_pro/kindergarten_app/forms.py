@@ -14,6 +14,7 @@ class ChildAddForm(forms.ModelForm):
         widgets = {
             'date_of_birth': TextInput(attrs={'placeholder': 'YYYY-MM-DD',
                                               'class': 'date'}),
+            'carers': forms.CheckboxSelectMultiple(),
         }
 
 

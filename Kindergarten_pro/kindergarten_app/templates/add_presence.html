@@ -2,10 +2,10 @@
 
 {% block content %}
     <form method="post" class="post-form">
-        <h2>{{ presence_list.group.set.all }}</h2>
-        <h2>Lista obecności dnia {{ presence_list.day }}</h2>
+        <h2 style="color: #17a2b8;">{{ presence_list.group.set.all }}</h2>
+        <h2 style="color: #17a2b8;">Lista obecności {{ presence_list.day }}</h2>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-info">Dodaj</button>
     </form>
+        <button type="submit" class="btn btn-info">Dodaj</button>
 {% endblock %}

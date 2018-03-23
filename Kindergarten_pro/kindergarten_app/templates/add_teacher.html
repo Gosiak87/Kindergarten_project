@@ -1,14 +1,16 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> Dodawanie nauczyciela </h1>
+    <h3 style="color: #17a2b8;"> Dodawanie nauczyciela </h3>
+    <hr>
     <form method="post" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-info">Dodaj nauczyciela</button>
-        <hr>
-        <br>
-        <a href="/main" class="btn btn-info">Wróć do strony głównej </a>
-        <br>
     </form>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <button type="submit" class="btn btn-info">Dodaj nauczyciela</button>
+            <a href="/all_teachers" class="btn btn-info">Wróć do Nauczycieli </a>
+        </form>
+    </nav>
 {% endblock %}

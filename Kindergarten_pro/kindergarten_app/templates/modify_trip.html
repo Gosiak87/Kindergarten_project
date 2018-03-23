@@ -1,14 +1,18 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> Edytowanie wycieczki </h1>
+    <h3 style="color: #17a2b8;"> Edytowanie wycieczki </h3>
+    <hr>
     <form method="post" class="post-form">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit" class="btn btn-info">Edytuj</button>
+    </form>
     <hr>
     <br>
-    <a href="/main" class="btn btn-info">Wróć do strony głównej </a>
-    <br>
-    </form>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <button type="submit" class="btn btn-info">Edytuj</button>
+            <a href="/main" class="btn btn-info">Wróć do Strony Głównej </a>
+        </form>
+    </nav>
 {% endblock %}

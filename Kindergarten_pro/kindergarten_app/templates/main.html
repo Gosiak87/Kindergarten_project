@@ -4,53 +4,63 @@
 <html lang="en">
 
 <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <title>{% block title %} Przedszkole Superbohaterów{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>{% block title %} Przedszkole Superbohaterów {% endblock %}</title>
 </head>
+<body>
 {% load static %}
 {% block header %}
-<img src='{% static 'super-heroes-trivia-category-comic-trivia-night.jpg' %}' height="150px" width="300" ALIGN="LEFT" >
-<h1> PRZEDSZKOLE SUPERBOHATERÓW </h1>
+    <img src='{% static 'super-heroes-trivia-category-comic-trivia-night.jpg' %}' height="150px" width="300"
+         ALIGN="LEFT">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #17a2b8;">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/main">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/all_children">Lista Przedszkolaków</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/all_groups">Lista Grup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/all_teachers">Lista Nauczycieli</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/all_trips">Lista Wycieczek</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"> Wyloguj się</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login"> Zaloguj się</a>
+                    </li>
+                {% endif %}
+
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" style="color: rgba(255,255,255,.5)">Zalogowany jako: {{ request.user.username }}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <h2 style="color: #17a2b8;"> PRZEDSZKOLE SUPERBOHATERÓW </h2 style="color: #17a2b8;">
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
-                <div id="header" class="well header-nav">
-                    <h5><i class="glyphicon glyphicon-home"></i>
-                        <small><b>PRZEDSZKOLE</b></small>
-                    </h5>
-                    <ul class="nav nav-pills nav-stacked">
-
-                        <li class="active"><a href="/all_children"> Lista Przedszkolaków</a></li>
-                        <li><a href="/all_groups"> Lista Grup </a></li>
-                        <li><a href="/all_teachers"> Lista Nauczycieli </a></li>
-                        <li><a href="/all_trips"> Lista Wycieczek</a></li>
-                         {% if request.user.is_authenticated %}
-                             <li><a href="/logout"> Wyloguj się</a></li>
-                        {% else %}
-                        <li><a href="/login"> Zaloguj się</a></li>
-                         {% endif %}
-
-                        {% if request.user.is_authenticated %}
-                            <li>Jesteś zalogowany jako: {{ request.user.username }}
-</li>
-                        {% endif %}
-
-
-
-
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <!-- Content Here -->
-            </div>
-        </div>
-    </div>
 {% endblock %}
 </body>
 </html>

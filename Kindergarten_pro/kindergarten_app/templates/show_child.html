@@ -1,27 +1,27 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> {{ child.name }} </h1>
+    <h3 style="color: #17a2b8;"> Przedszkolak : {{ child.name }} </h3>
+    <hr>
     <form action="{% url 'show-child' child.id %}" method="POST">
-        <label>
-         Data urodzenia : {{ child.date_of_birth }}
-        </label>
+        <label>Data urodzenia : {{ child.date_of_birth }}</label>
         <br>
-        <label>
-            <a href="/show_group/{{ child.group.id }}"> Grupa : {{ child.group }}</a>
-        </label>
+        <label>Grupa : <a href="/show_group/{{ child.group.id }}">{{ child.group }}</a></label>
         <br>
-        <label>
-            Rodzice :{% for carer in child.carers.all %}
-            <li>{{ carer.name }} {% endfor %}
-            </li>
+        <label>Rodzice :
+            {% for carer in child.carers.all %}
+                {{ carer.name }}
+            {% endfor %}
         </label>
-        <hr>
-        <a href="/modify_child/{{ child.id }}" class="btn btn-info"> Edytuj przedszkolaka </a>
-        <a href="/delete_child/{{ child.id }}" class="btn btn-info"> Usuń przedszkolaka </a>
-
-        <a href="/all_children" class="btn btn-info"> Pokaż wszystkich przedszkolaków </a>
-        <a href="/main" class="btn btn-info">Wróć do strony głównej</a>
-        </br>
     </form>
+    <hr>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <a href="/show_payment/{{ child.id }}" class="btn btn-info"> Pokaż płatności </a>
+            <a href="/modify_child/{{ child.id }}" class="btn btn-info"> Edytuj przedszkolaka </a>
+            <a href="/delete_child/{{ child.id }}" class="btn btn-info"> Usuń przedszkolaka </a>
+            <a href="/all_children" class="btn btn-info"> Pokaż wszystkich przedszkolaków </a>
+            <a href="/main" class="btn btn-info">Wróć do Strony Głównej</a>
+        </form>
+    </nav>
 {% endblock %}

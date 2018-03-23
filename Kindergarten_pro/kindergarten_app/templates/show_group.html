@@ -1,30 +1,49 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> {{ group.name }} </h1>
+    <h3 style="color: #17a2b8;"> Grupa: {{ group.name }} </h3>
+    <hr>
     <form action="{% url 'show-group' group.id %}" method="POST">
-        <h3> Nauczyciele grupy:</h3>  {% for teacher in group.teacher_set.all %}
-        <li>{{ teacher.name }}{% endfor %}
-        </li>
+        <h4> Nauczyciele grupy:</h4>
+        {% for teacher in group.teacher_set.all %}
+            <li>
+                <a href="/show_teacher/{{ teacher.id }}"> {{ teacher.name }}</a>
+            </li>
+        {% endfor %}
         <br>
-        <h3> Członkowie grupy: </h3> {% for child in group.child_set.all %}
-        <li>{{ child.name }}{% endfor %}
-        </li>
-        <br>
-        <a href="/show_lists_presence" class="btn btn-info"> Pokaż listy obecności </a>
-
-        <a href="/add_presence_children/{{ group.id }}" class="btn btn-info"> Dodaj listę obecności </a>
-        <a href="/modify_group/{{ group.id }}" class="btn btn-info"> Edytuj grupe </a>
-        <a href="/delete_group/{{ group.id }}" class="btn btn-info"> Usuń grupe </a>
-
-        <ul>
-            {% for presence_list in group.presencelist_set.all %}
-            <li><a href="{{ presence_list.id }}">{{ presence_list.day }}</a></li>
-            {% endfor %}
-        </ul>
-
-
-        <a href="/all_groups" class="btn btn-info"> Pokaż wszystkie grupy </a>
-        <a href="/main" class="btn btn-info">Wróć do strony głównej</a>
+        <h4> Członkowie grupy: </h4>
+        {% for child in group.child_set.all %}
+            <li>
+                <a href="/show_child/{{ child.id }}"> {{ child.name }}</a>
+            </li>
+        {% endfor %}
     </form>
+    <br>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <div class="btn-group">
+                <button type="button" class="btn btn-info">Pokaż listy obecności</button>
+                <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                    {% for presence_list in group.presencelist_set.all %}
+                        <li class="list-group">
+                            <a class="nav-link" href="{{ presence_list.id }}">{{ presence_list.day }}</a>
+                        </li>
+                    {% endfor %}
+                </div>
+            </div>
+            <a href="/add_presence_children/{{ group.id }}" class="btn btn-info"> Dodaj listę obecności </a>
+        </form>
+    </nav>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <a href="/modify_group/{{ group.id }}" class="btn btn-info"> Edytuj grupe </a>
+            <a href="/delete_group/{{ group.id }}" class="btn btn-info"> Usuń grupe </a>
+            <a href="/all_groups" class="btn btn-info"> Pokaż wszystkie grupy </a>
+            <a href="/main" class="btn btn-info">Wróć do Strony Głównej</a>
+        </form>
+    </nav>
 {% endblock %}

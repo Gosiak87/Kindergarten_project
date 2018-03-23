@@ -1,15 +1,21 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> Wycieczki </h1>
-    <h2></h2>
+    <h3 style="color: #17a2b8;"> Wycieczki </h3>
+    <hr>
     <ul class="list-group">
         {% for trip in trips %}
-            <li class="list-group-item list-group-item-info"><a href="show_trip/{{ trip.id }}">{{ trip.name }} </a></li>
+            <li class="list-group">
+                <a class="nav-link" href="show_trip/{{ trip.id }}">{{ trip.name }} </a>
+            </li>
         {% endfor %}
         <hr>
         <br>
-        <a href="/add_trip" class="btn btn-info" role="button">Dodaj wycieczkę </a>
-        <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <a href="/add_trip" class="btn btn-info" role="button">Dodaj wycieczkę </a>
+                <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
+            </form>
+        </nav>
     </ul>
 {% endblock %}

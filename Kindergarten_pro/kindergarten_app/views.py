@@ -114,6 +114,7 @@ class DeleteTripView(DeleteView):
 class AddChildView(View):
     def get(self, request):
         form = ChildAddForm()
+
         carer_1_form = CarerAddForm(prefix='carrer-1')
         carer_2_form = CarerAddForm(prefix='carrer-2')
 
@@ -337,7 +338,7 @@ class AddPresenceChildView(CreateView):
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        return '/show_group/{}'.format(self.group_id)
+        return '/all_presences_lists'
 
 
 class ShowPresenceView(DetailView):
@@ -359,6 +360,20 @@ class ShowPresenceView(DetailView):
             'presence_list': all_children,
             'presence_lists': presence_lists})
         return context
+
+
+class AllPresencesView(View):
+    def get(self, request):
+        presence_lists = PresenceList.objects.all()
+
+        ctx = {
+
+            " presence_lists":  presence_lists,
+        }
+
+        return render(request,
+                      template_name="all_presences_list.html",
+                      context=ctx)
 
 
 class ModifyChildView(UpdateView):
@@ -406,7 +421,7 @@ class SendMailView(View):
     def get(self, request):
         send_mail(
             'Płatność za czesne',
-            'Należność.',
+            'Należność 1500',
             'prrzedszkolecl@onet.pl',
             ['prrzedszkolecl@onet.pl'],
             fail_silently=False,

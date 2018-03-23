@@ -1,16 +1,21 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> Wszyscy nauczyciele w przedszkolu </h1>
-    <h2></h2>
+    <h3 style="color: #17a2b8;"> Wszyscy nauczyciele w przedszkolu </h3>
+    <hr>
     <ul class="list-group">
         {% for teacher in teachers %}
-            <li class="list-group-item list-group-item-info"><a
-                    href="show_teacher/{{ teacher.id }}">{{ teacher.name }} </a></li>
+            <li class="list-group">
+                <a class="nav-link" href="show_teacher/{{ teacher.id }}">{{ teacher.name }} </a>
+            </li>
         {% endfor %}
         <hr>
         <br>
-        <a href="/add_teacher" class="btn btn-info" role="button">Dodaj nauczyciela</a>
-        <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <a href="/add_teacher" class="btn btn-info" role="button">Dodaj nauczyciela</a>
+                <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
+            </form>
+        </nav>
     </ul>
 {% endblock %}

@@ -94,7 +94,7 @@ class Trip(models.Model):
 class PresenceList(models.Model):
     children = models.ManyToManyField(Child)
     day = models.DateTimeField()
-    group = models.ForeignKey(Group, on_delete=None) # presencelist.group_set
+    group = models.ForeignKey(Group, on_delete=None)  # presencelist.group_set
 
 
 #

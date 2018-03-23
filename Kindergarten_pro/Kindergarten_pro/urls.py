@@ -21,7 +21,7 @@ from kindergarten_app.views import (
     ShowTeacherView, ShowGroupView, AllTripsView, ShowTripView, AddTripView, UserLoginView,
     UserLogoutView, ModifyChildView, AddPresenceChildView,
     ModifyTripView, ModifyGroupView, ModifyTeacherView, DeleteChildView, DeleteGroupView, DeleteTeacherView,
-    DeleteTripView, SendMailView, ShowPresenceView, ShowPaymentView)
+    DeleteTripView, SendMailView, ShowPresenceView, ShowPaymentView, AllPresencesView )
 
 
 urlpatterns = [
@@ -39,14 +39,12 @@ urlpatterns = [
     url(r'^all_trips$', AllTripsView.as_view()),
     url(r'^show_trip/(?P<id>(\d)+)$', ShowTripView.as_view(), name="show-trip"),
     url(r'^add_trip$', AddTripView.as_view(), name="add-trip"),
-    url(r'^show_presence/(?P<pk>(\d)+)/$', ShowPresenceView.as_view(), name="presence"),
     url(r'^login$', UserLoginView.as_view(), name="login"),
     url(r'^logout$', UserLogoutView.as_view(), name="logout"),
     url(r'^modify_child/(?P<pk>(\d)+)/$', ModifyChildView.as_view(), name="modify-child"),
     url(r'^modify_trip/(?P<pk>(\d)+)/$', ModifyTripView.as_view()),
     url(r'^modify_group/(?P<pk>(\d)+)/$', ModifyGroupView.as_view()),
     url(r'^modify_teacher/(?P<pk>(\d)+)/$', ModifyTeacherView.as_view()),
-    # url(r'^presence_children$', PresenceChildrenView.as_view()),
     url(r'^add_presence_children/(?P<group_id>(\d)+)/$', AddPresenceChildView.as_view()),
     url(r'^delete_child/(?P<pk>(\d)+)/$', DeleteChildView.as_view()),
     url(r'^delete_group/(?P<pk>(\d)+)/$', DeleteGroupView.as_view()),
@@ -54,5 +52,7 @@ urlpatterns = [
     url(r'^delete_trip/(?P<pk>(\d)+)/$', DeleteTripView.as_view()),
     url(r'^send_mail/$', SendMailView.as_view(), name='send-mail'),
     url(r'^show_payment/(?P<pk>(\d)+)$', ShowPaymentView.as_view(), name='payment'),
+    url(r'^show_presence/(?P<pk>(\d)+)/$', ShowPresenceView.as_view(), name="presence"),
+    url(r'^all_presence_lists', AllPresencesView.as_view()),
 
 ]

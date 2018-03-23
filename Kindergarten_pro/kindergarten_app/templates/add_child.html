@@ -1,7 +1,8 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> Dodawanie dziecka </h1>
+    <h3 style="color: #17a2b8;"> Dodawanie dziecka </h3>
+    <hr>
     <form method="post" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
@@ -9,10 +10,11 @@
         {{ carer_1_form.as_p }}
         <h5>Carer 2:</h5>
         {{ carer_2_form.as_p }}
-        <button type="submit" class="btn btn-info">Dodaj wszystko</button>
-        <hr>
-        <br>
-        <a href="/main" class="btn btn-info">Wróć do strony głównej </a>
-        <br>
     </form>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <button type="submit" class="btn btn-info">Dodaj wszystko</button>
+            <a href="/all_children" class="btn btn-info">Wróć do Przedszkolaków </a>
+        </form>
+    </nav>
 {% endblock %}

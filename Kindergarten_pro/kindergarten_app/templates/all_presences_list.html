@@ -1,19 +1,18 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h3 style="color: #17a2b8;"> Wszystkie grupy </h3>
+    <h3 style="color: #17a2b8;"> Wszystkie listy obecności </h3>
     <hr>
     <ul class="list-group">
-        {% for group in groups %}
+        {% for presence_list in presence_lists %}
             <li class="list-group">
-                <a class="nav-link" href="show_group/{{ group.id }}">{{ group.name }}</a>
+                <a class="nav-link" href="show_presence/{{ presence_list.id }}">{{ group.name }} </a>
             </li>
         {% endfor %}
         <hr>
         <br>
         <nav class="navbar navbar-light bg-light">
             <form class="form-inline">
-                <a href="/add_group" class="btn btn-info" role="button">Dodaj grupę</a>
                 <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej</a>
             </form>
         </nav>

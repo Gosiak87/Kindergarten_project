@@ -1,14 +1,16 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h1> Dodawanie grupy </h1>
+    <h3 style="color: #17a2b8;"> Dodawanie grupy </h3>
+    <hr>
     <form method="post" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-info">Dodaj grupe</button>
-        <hr>
-        <br>
-        <a href="/main" class="btn btn-info" role="button">Wróć do strony głównej </a>
-        <br>
     </form>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <button type="submit" class="btn btn-info">Dodaj grupe</button>
+            <a href="/all_groups" class="btn btn-info" role="button">Wróć do Grup </a>
+        </form>
+    </nav>
 {% endblock %}
