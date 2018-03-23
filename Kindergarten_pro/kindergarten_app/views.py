@@ -310,6 +310,21 @@ class AddPresenceChildView(CreateView):
     form_class = PresenceListForm
     success_url = "/"
 
+    # ustawiamy domyslne wartosci
+    # def get_initial(self):
+    #     group_pk = self.kwargs.get('group_id')
+    #     children = Group.objects.get(id=group_pk).child_set.all()
+    #     return {
+    #         'children': children,
+    #     }
+
+    def get_form(self, form_class=None):
+        group_pk = self.kwargs.get('group_id')
+        children = Group.objects.get(id=group_pk).child_set.all()
+        form = super().get_form(form_class)
+        form.fields["children"].queryset = children
+        return form
+
     def dispatch(self, request, *args, **kwargs):
         self.group_id = kwargs.pop('group_id')
         return super().dispatch(request, *args, **kwargs)

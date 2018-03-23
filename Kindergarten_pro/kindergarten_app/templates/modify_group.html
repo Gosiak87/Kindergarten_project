@@ -5,12 +5,12 @@
     <form method="post" class="post-form">
         {{ form.as_p }}
         {% csrf_token %}
-    </form>
+
     <hr>
     <br>
         <nav class="navbar navbar-light bg-light">
         <form class="form-inline">
-    <a href="/show_group/{{ group.id }}" button type="submit" class="btn btn-info">Edytuj</a>
+    <button href="/show_group/{{ group.id }}" button type="submit" class="btn btn-info">Edytuj</button>
     <a href="/main" class="btn btn-info">Wróć do Strony Głównej</a>
         </form>
         </nav>
