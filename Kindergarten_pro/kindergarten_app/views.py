@@ -356,7 +356,7 @@ class AllPresencesView(View):
 
         ctx = {
 
-            " presence_lists":  presence_lists,
+            "presence_lists":  presence_lists,
         }
 
         return render(request,
@@ -367,7 +367,6 @@ class AllPresencesView(View):
 class ModifyChildView(UpdateView):
     template_name = "modify_child.html"
     model = Child
-    fields = '__all__'
     fields = '__all__'
 
     def get_success_url(self):

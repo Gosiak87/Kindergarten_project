@@ -1,19 +1,17 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <h3 style="color: #17a2b8;"> {{ object }} </h3>
+    <h3 style="color: #17a2b8;"> {{ object.presencelist.date }} </h3>
+    <br>
+    <br>
+
     {{ object.group.name }}
     <ul>
         {% for child in presence_list %}
-            <li>{{ child.name }} {% if child.present %}Był{% else %}Może nie płacić {{ child.present }}{% endif %}</li>
+            <li>{{ child.name }} {% if child.present %} : OBECNY{% else %} : NIEOBECNY{{ child.present }}{% endif %}</li>
         {% endfor %}
     </ul>
-    <ul>
-        {% for presence_list in presence_lists %}
-            <li>
-                {{ presence_list.id }} - {{ presence_list.day }}
-            </li>
-        {% endfor %}
+
     </ul>
     <br>
     <a href="/main" class="btn btn-info">Wróć do strony głównej</a>

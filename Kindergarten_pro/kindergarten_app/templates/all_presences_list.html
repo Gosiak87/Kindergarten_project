@@ -6,8 +6,11 @@
     <ul class="list-group">
         {% for presence_list in presence_lists %}
             <li class="list-group">
-                <a class="nav-link" href="show_presence/{{ presence_list.day }}"> </a>
+                <a class="nav-link" href="show_presence/{{ presence_list.id }}"> {{ presence_list.day }}</a>
             </li>
+            {% empty %}
+
+            PUSTO!!!!
         {% endfor %}
         <hr>
         <br>
