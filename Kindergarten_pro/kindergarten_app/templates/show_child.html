@@ -9,8 +9,8 @@
         <label>Grupa : <a href="/show_group/{{ child.group.id }}">{{ child.group }}</a></label>
         <br>
         <label>Rodzice :
-            {% for carer in child.carers.all %}
-              <li></li>  {{ carer.name }}
+            <li> {% for carer in child.carers.all %}
+               {{ carer.name }} </li>
             {% endfor %}
         </label>
     </form>

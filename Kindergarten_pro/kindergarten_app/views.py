@@ -33,7 +33,7 @@ class UserLoginView(View):
     def post(self, request):
         form = LoginForm(request.POST, request=request)
         if form.is_valid():
-            return redirect(reverse('main'))
+            return redirect(reverse('all-children'))
         return render(request, template_name="user_login.html",
                       context={'form': form})
 
@@ -429,7 +429,10 @@ class SendMailView(View):
             ['prrzedszkolecl@onet.pl'],
             fail_silently=False,
         )
-        return HttpResponse('Wyslalem')
+        return HttpResponse('Mail wysłany')
+
+
+#return "/show_child/{}".format(self.object.pk)
 
 
 class ShowPaymentView(DetailView):
@@ -450,8 +453,8 @@ class ShowPaymentView(DetailView):
             if self.object in presence_list.children.all():
                 counter += 1
 
-        base_payment = 15000
-        day_payment = 100
+        base_payment = 1500
+        day_payment = 10
 
         payment = base_payment - counter * day_payment
 

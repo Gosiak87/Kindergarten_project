@@ -27,7 +27,7 @@ from kindergarten_app.views import (
 urlpatterns = [
     url(r'admin/', admin.site.urls),
     url(r'^main$', MainView.as_view(), name="main"),
-    url(r'^all_children$', AllChildrenView.as_view()),
+    url(r'^all_children$', AllChildrenView.as_view(), name="all-children"),
     url(r'^add_child$', AddChildView.as_view(), name="add-child"),
     url(r'^all_teachers$', AllTeacherView.as_view()),
     url(r'^add_teacher$', AddTeacherView.as_view(), name="add-teacher"),

@@ -4,7 +4,12 @@
     <h3 style="color: #17a2b8;"> Płatność za marzec </h3>
         <h3> Przedszkolak: {{ object.name }}</h3>
         <br>
-        <h3> Kwota do zapłaty : {{ payment }}</h3>
+        <p>Czesne za przedszkole wynosi 1500 zł miesięcznie.
+            Jeśli przedszkolaka nie było to wtedy odejmujemy -10 zł dniówki za żywność.
+            Ostateczna kwota miesięczna zależna jest od obecności przedszkolaka.
+        </p>
+
+        <h3> Kwota do zapłaty : {{ payment }} zł </h3>
         <br>
         <a href="/send_mail" class="btn btn-info"> Wyslij informacje o płatności  </a>
         <a href="/main" class="btn btn-info">Wróć do Strony Głównej</a>
