@@ -1,16 +1,16 @@
-## Kindergarten_project
+# Kindergarten_project
 
-## Application for managing a kindergarten.
+# Application for managing a kindergarten.
 
-# back-end in Django
-# front-end in Bootstrap
+## back-end in Django
+## front-end in Bootstrap
 
-# functionality:
+## functionality:
  - adding and removing groups, teachers, preschoolers, parents;
  - presence logs
  - counting payments
  - notification by e-mail about payments
 
 
- # Author
+## Author
  Małgorzata Miziołek-Fiedorczuk
